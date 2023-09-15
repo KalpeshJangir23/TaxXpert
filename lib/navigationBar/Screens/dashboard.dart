@@ -55,35 +55,33 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Expanded(
-                        child: Container(
-                          width: 150,
-                          height: 215,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.grey,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text("Old Regime"),
-                              const Divider(
-                                thickness: 1,
-                              ),
-                              Column(
-                                children: [
-                                  Lottie.asset(
-                                    "assets/lottie/money.json",
-                                  ),
-                                  Text(
-                                    "₹ 96,908",
-                                    style: TextStyle(fontSize: 23),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                      child: Container(
+                        width: 150,
+                        height: 215,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: Colors.grey,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text("Old Regime"),
+                            const Divider(
+                              thickness: 1,
+                            ),
+                            Column(
+                              children: [
+                                Lottie.asset(
+                                  "assets/lottie/money.json",
+                                ),
+                                Text(
+                                  "₹ 96,908",
+                                  style: TextStyle(fontSize: 23),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -147,12 +145,18 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   controller: tabController,
-                                  tabs: [
+                                  tabs: const [
                                     Tab(
-                                      text: 'Tab 1',
+                                      child: Text(
+                                        "Salary & Income",
+                                        softWrap: true,
+                                      ),
                                     ),
                                     Tab(
-                                      text: 'Tab 1',
+                                      child: Text(
+                                        'Exmeption & Deduction',
+                                        softWrap: true,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -163,7 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                         Expanded(
                           child: TabBarView(
                             controller: tabController,
-                            children: [SalaryandIncome(), ExmeptionAndDeduction()],
+                            children: const [SalaryandIncome(), ExmeptionAndDeduction()],
                           ),
                         )
                       ],
