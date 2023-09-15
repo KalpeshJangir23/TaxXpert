@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nfc_iterators/ChatBot/chat_bot_screen.dart';
+import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/TaxCalculation/new_tax_slab_calc.dart';
+import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/TaxCalculation/old_tax_slab_calc.dart';
 import 'package:nfc_iterators/navigationBar/Screens/calculator.dart';
 import 'package:nfc_iterators/navigationBar/Screens/exemptionNdeduction.dart';
 import 'package:nfc_iterators/navigationBar/Screens/insights.dart';
 import 'package:nfc_iterators/navigationBar/Screens/salaryNincome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:math';
+
+class NewTaxSlab {
+  final double lowerLimit;
+  final double upperLimit;
+  final double rate;
+
+  NewTaxSlab(this.lowerLimit, this.upperLimit, this.rate);
+}
+
+class TaxSlab {
+  final double lowerLimit;
+  final double upperLimit;
+  final double rate;
+
+  TaxSlab(this.lowerLimit, this.upperLimit, this.rate);
+}
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -47,14 +68,79 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     await prefs.setDouble('totalSalary', totalSalary);
   }
 
+  double newRegimeIncomeTaxCalc(double totalAnnualIncome, double totalDeductions) {
+    double income = totalAnnualIncome - totalDeductions;
+
+    final slabs = [
+      NewTaxSlab(0, 250000, 0.05),
+      NewTaxSlab(250000, 500000, 0.1),
+      NewTaxSlab(500000, 750000, 0.15),
+      NewTaxSlab(750000, 1000000, 0.2),
+      NewTaxSlab(1000000, 1250000, 0.25),
+      NewTaxSlab(1250000, 1500000, 0.3),
+    ];
+
+    double tax = 0.0;
+
+    for (final slab in slabs) {
+      if (income <= 0) {
+        break;
+      }
+
+      final slabAmount = min(slab.upperLimit, income) - slab.lowerLimit;
+      if (slabAmount > 0) {
+        tax += slabAmount * slab.rate;
+      }
+      income -= slabAmount;
+    }
+
+    return tax;
+  }
+
+  double oldRegimeIncomeTaxCalc(double totalAnnualIncome, double totalDeductions) {
+    double income = totalAnnualIncome - totalDeductions;
+
+    final slabs = [
+      TaxSlab(0, 250000, 0.05),
+      TaxSlab(250000, 500000, 0.2),
+      TaxSlab(500000, double.infinity, 0.3),
+    ];
+
+    double tax = 0.0;
+
+    for (final slab in slabs) {
+      if (income <= 0) {
+        break;
+      }
+
+      final slabAmount = min(slab.upperLimit, income) - slab.lowerLimit;
+      if (slabAmount > 0) {
+        tax += slabAmount * slab.rate;
+      }
+      income -= slabAmount;
+    }
+
+    return tax;
+  }
+
   @override
   Widget build(BuildContext context) {
     double oldRegimeTaxRate = 0.30; // 30%
     double newRegimeTaxRate = 0.20; // 20%
 
-    double oldRegimeTaxAmount = totalSalary * oldRegimeTaxRate;
-    double newRegimeTaxAmount = totalSalary * newRegimeTaxRate;
-    double ans = newRegimeTaxAmount - oldRegimeTaxAmount;
+    // double oldRegimeTaxAmount = totalSalary * oldRegimeTaxRate;
+    // double newRegimeTaxAmount = totalSalary * newRegimeTaxRate;
+    // double ans = newRegimeTaxAmount - oldRegimeTaxAmount;
+
+    double oldRegimeTaxAmount = oldRegimeIncomeTaxCalc(totalSalary, 50000);
+    double newRegimeTaxAmount = newRegimeIncomeTaxCalc(totalSalary, 50000);
+    // if (newRegimeTaxAmount >= oldRegimeTaxAmount) {
+    //   double ans = newRegimeTaxAmount - oldRegimeTaxAmount;
+    // } else {
+    //   double ans = oldRegimeTaxAmount - newRegimeTaxAmount;
+    // }
+    double ans = oldRegimeTaxAmount - newRegimeTaxAmount;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -68,6 +154,15 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
           ],
         ),
         drawer: MyDrawer(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBotScreen()));
+          },
+          backgroundColor: Colors.white,
+          child: CircleAvatar(
+            child: Image.asset('assets/chatBot_intructor.png'),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -122,7 +217,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                             mainAxisSize: MainAxisSize.min,
                             //crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text("Old Regime"),
+                              const Text("New Regime"),
                               const Divider(
                                 thickness: 1,
                               ),
@@ -236,35 +331,11 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Dashboard'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calculate),
-            title: const Text('Calculator'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CalculatorScreen()));
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.article),
             title: const Text('News'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Profile'),
-            onTap: () {
-              Navigator.pop(context);
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
             },
           ),
           ListTile(

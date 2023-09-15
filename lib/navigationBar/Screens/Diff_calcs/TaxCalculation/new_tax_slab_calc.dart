@@ -8,32 +8,34 @@ class NewTaxSlab {
   NewTaxSlab(this.lowerLimit, this.upperLimit, this.rate);
 }
 
-double newRegimeIncomeTaxCalc(
-    double totalAnnualIncome, double totalDeductions) {
-  double income = totalAnnualIncome - totalDeductions;
+class NewTax {
+  double newRegimeIncomeTaxCalc(
+      double totalAnnualIncome, double totalDeductions) {
+    double income = totalAnnualIncome - totalDeductions;
 
-  final slabs = [
-    NewTaxSlab(250000, 500000, 0.05),
-    NewTaxSlab(500000, 750000, 0.1),
-    NewTaxSlab(750000, 1000000, 0.15),
-    NewTaxSlab(1000000, 1250000, 0.2),
-    NewTaxSlab(1250000, 1500000, 0.25),
-    NewTaxSlab(1500000, double.infinity, 0.3),
-  ];
+    final slabs = [
+      NewTaxSlab(250000, 500000, 0.05),
+      NewTaxSlab(500000, 750000, 0.1),
+      NewTaxSlab(750000, 1000000, 0.15),
+      NewTaxSlab(1000000, 1250000, 0.2),
+      NewTaxSlab(1250000, 1500000, 0.25),
+      NewTaxSlab(1500000, double.infinity, 0.3),
+    ];
 
-  double tax = 0.0;
-  double taxableIncome = income;
+    double tax = 0.0;
+    double taxableIncome = income;
 
-  for (final slab in slabs) {
-    if (taxableIncome <= 0) {
-      break;
+    for (final slab in slabs) {
+      if (taxableIncome <= 0) {
+        break;
+      }
+
+      final slabAmount = min(slab.upperLimit, taxableIncome) - slab.lowerLimit;
+      tax += slabAmount * slab.rate;
+      taxableIncome -= slabAmount;
     }
 
-    final slabAmount = min(slab.upperLimit, taxableIncome) - slab.lowerLimit;
-    tax += slabAmount * slab.rate;
-    taxableIncome -= slabAmount;
+    print(tax);
+    return tax;
   }
-
-  print(tax);
-  return tax;
 }
