@@ -1,0 +1,157 @@
+import 'package:flutter/material.dart';
+import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_button.dart';
+import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_text_field.dart';
+
+class EMICalc extends StatefulWidget {
+  const EMICalc({super.key});
+
+  @override
+  State<EMICalc> createState() => _EMICalcState();
+}
+
+class _EMICalcState extends State<EMICalc> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _loanAmountController = TextEditingController();
+  TextEditingController _interestController = TextEditingController();
+  TextEditingController _tenureController = TextEditingController();
+  String name = '';
+  String ogName = '';
+  int loanAmount = 0;
+  int ogAmount = 0;
+  int years = 0;
+  int ogYears = 0;
+  double interest = 0.0;
+  double ogInterest = 0.0;
+
+  void calcEmi() {
+    ogName = _nameController.toString();
+    ogAmount = int.tryParse(_loanAmountController.text)!;
+    ogYears = int.tryParse(_tenureController.text)!;
+    ogInterest = double.tryParse(_interestController.text)!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Emi Calculator"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomTextField(
+                hintText: 'Eg. Home loan, Electronics, etc',
+                controller: _nameController,
+                logo: Icon(Icons.accessibility_sharp),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              CustomTextField(
+                hintText: 'Loan Amount',
+                controller: _loanAmountController,
+                logo: Icon(Icons.attach_money_outlined),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              CustomTextField(
+                hintText: 'Tenure (in Months)',
+                controller: _tenureController,
+                logo: Icon(
+                  Icons.calendar_month,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              CustomTextField(
+                hintText: 'Interest in %',
+                controller: _interestController,
+                logo: Icon(
+                  Icons.percent_outlined,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              CustomButton(label: 'Calculate', onPressed: calcEmi),
+              const SizedBox(
+                height: 15,
+              ),
+              Card(
+                elevation: 5.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Container(
+                  width: 400,
+                  height: 170,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.grey.shade400,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Your loan details as specified by you ',
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                        ),
+                        SizedBox(
+                          height: 13,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Loan Amount', style: TextStyle(fontSize: 20)),
+                            Text('₹ 1500000',
+                                style: TextStyle(
+                                    color: Colors.blue.shade400, fontSize: 24)),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Tenure',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Text(
+                              '20 years',
+                              style: TextStyle(
+                                  color: Colors.blue.shade400, fontSize: 24),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Interest Rate ',
+                                style: TextStyle(fontSize: 20)),
+                            Text('20 %',
+                                style: TextStyle(
+                                    color: Colors.blue.shade400, fontSize: 24)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
