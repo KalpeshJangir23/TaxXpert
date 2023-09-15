@@ -4,6 +4,7 @@ import 'package:nfc_iterators/navigationBar/Screens/calculator.dart';
 import 'package:nfc_iterators/navigationBar/Screens/exemptionNdeduction.dart';
 import 'package:nfc_iterators/navigationBar/Screens/insights.dart';
 import 'package:nfc_iterators/navigationBar/Screens/salaryNincome.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -19,6 +20,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
   void initState() {
     tabController = TabController(length: 2, vsync: this);
     super.initState();
+    initSharedPreferences();
   }
 
   @override
@@ -27,11 +29,32 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     super.dispose();
   }
 
-  int newRegime = 0;
-  int oldRegime = 0;
+  double totalSalary = 0.0;
+
+  late SharedPreferences prefs;
+
+  Future<void> initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // Retrieve the totalSalary from SharedPreferences
+    double savedTotalSalary = prefs.getDouble('totalSalary') ?? 0.0;
+    setState(() {
+      totalSalary = savedTotalSalary;
+    });
+  }
+
+  Future<void> saveTotalSalaryToSharedPreferences(double totalSalary) async {
+    // Save the totalSalary to SharedPreferences
+    await prefs.setDouble('totalSalary', totalSalary);
+  }
 
   @override
   Widget build(BuildContext context) {
+    double oldRegimeTaxRate = 0.30; // 30%
+    double newRegimeTaxRate = 0.20; // 20%
+
+    double oldRegimeTaxAmount = totalSalary * oldRegimeTaxRate;
+    double newRegimeTaxAmount = totalSalary * newRegimeTaxRate;
+    double ans = newRegimeTaxAmount - oldRegimeTaxAmount;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -76,7 +99,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                                   "assets/lottie/money.json",
                                 ),
                                 Text(
-                                  "₹ 96,908",
+                                  '₹${oldRegimeTaxAmount.toStringAsFixed(2)}',
                                   style: TextStyle(fontSize: 23),
                                 ),
                               ],
@@ -108,7 +131,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                                   Lottie.asset(
                                     "assets/lottie/money.json",
                                   ),
-                                  Text("₹ 96,908"),
+                                  Text('₹${newRegimeTaxAmount.toStringAsFixed(2)}'),
                                 ],
                               ),
                             ],
@@ -118,6 +141,8 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                     ),
                   ],
                 ),
+
+                Text('₹${ans.toStringAsFixed(2)}'),
 
                 //! On screen Tab bar
                 Padding(

@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/TextWithdivider.dart';
 
 class UserSalaryIncome extends StatefulWidget {
-  const UserSalaryIncome({super.key});
+  final void Function(double totalSalary) onTotalSalaryCalculated;
+
+  const UserSalaryIncome({super.key, required this.onTotalSalaryCalculated});
 
   @override
   State<UserSalaryIncome> createState() => _UserSalaryIncomeState();
@@ -24,6 +27,12 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
   TextEditingController otherAllowancesController = TextEditingController();
   double totalSalary = 0.0; // Initialize with 0
 
+  // Define a key to uniquely identify the totalSalary in SharedPreferences
+  static const String totalSalaryKey = 'totalSalary';
+
+  // SharedPreferences instance
+  late SharedPreferences prefs;
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +40,23 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
     hraController.addListener(calculateSalary);
     bonusController.addListener(calculateSalary);
     otherAllowancesController.addListener(calculateSalary);
+
+    // Initialize SharedPreferences
+    initSharedPreferences();
+  }
+
+  Future<void> initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // Retrieve the totalSalary from SharedPreferences
+    double savedTotalSalary = prefs.getDouble(totalSalaryKey) ?? 0.0;
+    setState(() {
+      totalSalary = savedTotalSalary;
+    });
+  }
+
+  Future<void> saveTotalSalaryToSharedPreferences(double totalSalary) async {
+    // Save the totalSalary to SharedPreferences
+    await prefs.setDouble(totalSalaryKey, totalSalary);
   }
 
   @override
@@ -39,6 +65,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
     hraController.dispose();
     bonusController.dispose();
     otherAllowancesController.dispose();
+    saveTotalSalaryToSharedPreferences(totalSalary); // Save totalSalary when disposing
     super.dispose();
   }
 
@@ -51,6 +78,11 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
     setState(() {
       this.totalSalary = totalSalary;
     });
+
+    // Save the updated totalSalary to SharedPreferences
+    saveTotalSalaryToSharedPreferences(totalSalary);
+
+    widget.onTotalSalaryCalculated(totalSalary);
   }
 
   double calculateField(String fieldName) {
@@ -113,7 +145,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Salary    & Income')),
+        appBar: AppBar(title: Text('Salary & Income')),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

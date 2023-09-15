@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_iterators/navigationBar/Screens/userSalaryandIncome.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/TextWithdivider.dart';
 
@@ -11,22 +12,55 @@ class SalaryandIncome extends StatefulWidget {
 }
 
 class _SalaryandIncomeState extends State<SalaryandIncome> {
+  double totalSalary = 0.0;
+
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPreferences();
+  }
+
+  Future<void> initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    // Retrieve the totalSalary from SharedPreferences
+    double savedTotalSalary = prefs.getDouble('totalSalary') ?? 0.0;
+    setState(() {
+      totalSalary = savedTotalSalary;
+    });
+  }
+
+  Future<void> saveTotalSalaryToSharedPreferences(double totalSalary) async {
+    // Save the totalSalary to SharedPreferences
+    await prefs.setDouble('totalSalary', totalSalary);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
           GestureDetector(
-            onDoubleTap: () {
-              Navigator.push(
+            onDoubleTap: () async {
+              final newTotalSalary = await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => UserSalaryIncome()), // Navigate to the SecondScreen
+                MaterialPageRoute(
+                  builder: (context) => UserSalaryIncome(
+                    onTotalSalaryCalculated: (newTotalSalary) {
+                      setState(() {
+                        totalSalary = newTotalSalary;
+                      });
+                      saveTotalSalaryToSharedPreferences(newTotalSalary);
+                    },
+                  ),
+                ),
               );
             },
-            child: const TextWithdivider(
+            child: TextWithdivider(
               label: "Salary and Income",
               value: "Taxable Income from business...",
-              income: "₹1,20,000",
+              income: '₹${totalSalary.toStringAsFixed(2)}',
               showIncome: true,
               showDivider: true,
             ),
