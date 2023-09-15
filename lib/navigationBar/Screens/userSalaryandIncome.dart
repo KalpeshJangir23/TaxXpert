@@ -194,41 +194,47 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(labelText),
-        Row(
-          children: [
-            Flexible(
-              flex: 2,
-              child: TextField(
-                controller: getController(fieldName),
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Amount',
+        Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Text(labelText),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Row(
+            children: [
+              Flexible(
+                flex: 2,
+                child: TextField(
+                  controller: getController(fieldName),
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Amount',
+                  ),
                 ),
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: CupertinoSlidingSegmentedControl(
-                groupValue: selectedOptions[fieldName],
-                onValueChanged: (value) {
-                  setState(() {
-                    selectedOptions[fieldName] = value ?? 'M';
-                  });
-                },
-                children: {
-                  'M': Container(
-                    padding: EdgeInsets.all(3.0),
-                    child: Text('M'),
-                  ),
-                  'Y': Container(
-                    padding: EdgeInsets.all(3.0),
-                    child: Text('Y'),
-                  ),
-                },
+              Flexible(
+                flex: 1,
+                child: CupertinoSlidingSegmentedControl(
+                  groupValue: selectedOptions[fieldName],
+                  onValueChanged: (value) {
+                    setState(() {
+                      selectedOptions[fieldName] = value ?? 'M';
+                    });
+                  },
+                  children: {
+                    'M': Container(
+                      padding: EdgeInsets.all(3.0),
+                      child: Text('M'),
+                    ),
+                    'Y': Container(
+                      padding: EdgeInsets.all(3.0),
+                      child: Text('Y'),
+                    ),
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
