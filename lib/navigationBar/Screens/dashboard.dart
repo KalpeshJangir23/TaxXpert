@@ -256,7 +256,7 @@ class MyDrawer extends StatelessWidget {
             title: const Text('News'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const NewsScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
             },
           ),
           ListTile(

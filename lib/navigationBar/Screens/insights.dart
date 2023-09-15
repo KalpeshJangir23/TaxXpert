@@ -1,54 +1,192 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class NewsScreen extends StatefulWidget {
-  const NewsScreen({super.key});
-
-  @override
-  State<NewsScreen> createState() => _NewsScreenState();
-}
-
-class _NewsScreenState extends State<NewsScreen> {
+class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Define your salary and tax values
+    double annualSalary = 1200000;
+    double rentalIncome = 300000;
+
+    // Calculate the values for the Pie Chart
+    double totalIncome = annualSalary + rentalIncome;
+    double incomeTax = 229320; // Corrected: Define incomeTax
+    double propertyTax = totalIncome - annualSalary - incomeTax; // Corrected: Calculate propertyTax
+
+    double annualSalaryPercentage = (annualSalary / totalIncome) * 100;
+    double rentalIncomePercentage = (rentalIncome / totalIncome) * 100;
+    double incomeTaxPercentage = (incomeTax / totalIncome) * 100;
+    double propertyTaxPercentage = (propertyTax / totalIncome) * 100;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pie Chart'),
+        title: const Text('Income and Tax Pie Chart'),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 500,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: 400,
+              height: 400,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.amberAccent,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      child: PieChart(
+                        PieChartData(
+                          sections: [
+                            PieChartSectionData(
+                              color: Colors.blue,
+                              value: annualSalaryPercentage,
+                              title: '${annualSalaryPercentage.toStringAsFixed(2)}%',
+                            ),
+                            PieChartSectionData(
+                              color: Colors.red,
+                              value: rentalIncomePercentage,
+                              title: '${rentalIncomePercentage.toStringAsFixed(2)}%',
+                            ),
+                            PieChartSectionData(
+                              color: Colors.green,
+                              value: incomeTaxPercentage,
+                              title: '${incomeTaxPercentage.toStringAsFixed(2)}%',
+                            ),
+                            PieChartSectionData(
+                              color: Colors.orange,
+                              value: propertyTaxPercentage,
+                              title: '${propertyTaxPercentage.toStringAsFixed(2)}%',
+                            ),
+                          ],
+                          borderData: FlBorderData(show: false),
+                          centerSpaceRadius: 60,
+                          sectionsSpace: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildLegendItem('Gross Salary', annualSalary, Colors.blue),
+                      _buildLegendItem('Rental Income', rentalIncome, Colors.red),
+                      _buildLegendItem('Income Tax', incomeTax, Colors.green),
+                      _buildLegendItem('Property Tax', propertyTax, Colors.orange),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  const Text("Annual INCOME", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Table(
+                          border: TableBorder.all(), // Add borders around cells
+                          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                          children: [
+                            const TableRow(
+                              children: [
+                                TableCell(
+                                  child: Center(
+                                    child: Text(" Net income Before Tax's", softWrap: true, style: TextStyle(fontSize: 18)),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Center(
+                                    child: Text(" Net income After Tax's", style: TextStyle(fontSize: 18)),
+                                  ),
+                                )
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Center(
+                                    child: Text('₹${(totalIncome).toStringAsFixed(2)}', style: const TextStyle(fontSize: 20)),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Center(
+                                    child: Text(
+                                      '₹${(totalIncome - incomeTax - propertyTax).toStringAsFixed(2)}',
+                                      style: const TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    "You can reduce tax to ₹2,13,720 and save ₹46,800 by investing ₹1,50,000 more with 80C as per the old tax regime.",
+                    style: TextStyle(fontSize: 20, color: Colors.green),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        // Show an alert dialog when the button is pressed.
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Reducing Taxes with 80C'),
+                              content: const Text(
+                                'Section 80C of the Income Tax Act allows individuals to claim deductions on investments such as EPF, PPF, NSC, ELSS, and more, up to a maximum limit of Rs. 1.5 lakh per year. By investing in these instruments, you can reduce your taxable income and ultimately pay less income tax.',
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Close'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: const Text(
+                        "Tell me more about reducing taxes with 80C.",
+                        style: TextStyle(color: Colors.red, fontSize: 15),
+                      ))
+                ],
+              ),
+            )
+          ],
         ),
-        child: PieChart(
-          PieChartData(
-            sections: [
-              PieChartSectionData(
-                color: Colors.blue,
-                value: 30, // Percentage value for this section
-                title: 'Blue',
-                radius: 120, // Radius of the section
-              ),
-              PieChartSectionData(
-                color: Colors.red,
-                value: 40,
-                title: 'Red',
-                radius: 120,
-              ),
-              PieChartSectionData(
-                color: Colors.green,
-                value: 20,
-                title: 'Green',
-                radius: 120,
-              ),
-            ],
-            borderData: FlBorderData(show: false),
-            centerSpaceRadius: 0,
-            sectionsSpace: 0,
+      ),
+    );
+  }
+
+  Widget _buildLegendItem(String title, double value, Color color) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 12,
+            height: 12,
+            color: color,
           ),
-        ),
+          const SizedBox(width: 4),
+          Text(
+            '$title: ₹${value.toStringAsFixed(2)}',
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }
