@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_text_field.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+import 'Diff_calcs/utils/custom_text_field.dart';
+import 'loginScreen.dart';
+
+class EntryTimeScreen extends StatefulWidget {
+  const EntryTimeScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<EntryTimeScreen> createState() => _EntryTimeScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _EntryTimeScreenState extends State<EntryTimeScreen> {
   DateTime _dateTime = DateTime.now();
   void _showDatePicker() {
     showDatePicker(
@@ -33,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Color(0xff92B79F),
         elevation: 0,
         title: Text(
-          'Profile Details',
+          'Enter Your Details',
           style: TextStyle(color: Color(0xffffffff)),
         ),
       ),
@@ -43,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               CustomTextField(
-                hintText: "Kalpesh Jangir",
+                hintText: "Enter Your name",
                 controller: controller,
                 logo: Icon(Icons.people),
               ),
@@ -214,7 +217,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                   )
                 ],
-              )
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: const Size(244, 42), backgroundColor: const Color(0xff263a29)),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return const Signup();
+                    }));
+                  },
+                  child: Text(
+                    "Get started",
+                    style: GoogleFonts.georama(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

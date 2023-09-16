@@ -161,7 +161,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
               const SizedBox(height: 20.0),
               Center(
                 child: Container(
-                  width: 150,
+                  width: 210,
                   height: 50,
                   decoration: BoxDecoration(
                     color: const Color(0xffEFF8F1),

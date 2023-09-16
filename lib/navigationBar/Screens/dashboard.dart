@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 
 import 'caScreen.dart';
+import 'loginScreen.dart';
 
 class NewTaxSlab {
   final double lowerLimit;
@@ -484,6 +485,18 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               // Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
+            },
+          ),
+          Spacer(),
+          ListTile(
+            leading: const Icon(Icons.logout_outlined),
+            title: const Text(
+              'Logout',
+              style: TextStyle(color: Colors.black),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
             },
           ),
         ],

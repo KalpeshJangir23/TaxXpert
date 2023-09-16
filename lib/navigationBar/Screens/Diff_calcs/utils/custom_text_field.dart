@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
       backgroundColor: Color(0xffEFF8F1),
       cursorColor: Colors.black,
       enabled: true,
-      textInputType: TextInputType.number,
+      //textInputType: TextInputType.number,
       placeholder: TextPlus(
         hintText,
         color: Colors.black38,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nfc_iterators/navigationBar/Screens/firstScreen.dart';
+import 'package:nfc_iterators/navigationBar/Screens/loginScreen.dart';
 import 'package:nfc_iterators/navigationBar/navigationbarScreen.dart';
+
+import 'navigationBar/Screens/enterYourbasc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +15,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: BottomNavigationScreen(),
-    );
+    return const MaterialApp(debugShowCheckedModeBanner: false, title: 'Flutter Demo', home: FirstScreen()
+        //home: BottomNavigationScreen(),
+        );
   }
 }

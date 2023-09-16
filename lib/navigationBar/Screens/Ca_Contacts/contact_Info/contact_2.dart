@@ -11,159 +11,261 @@ class _SecondcontactState extends State<Secondcontact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 50),
-          Container(
-            width: 400,
-            height: 130,
-            decoration: const BoxDecoration(
-              color: Color(0xffddffbb),
+      backgroundColor: Color(0xffEFF8F1),
+      appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Color(0xffEFF8F1),
+          title: const Text(
+            "Details",
+            style: TextStyle(
+              color: Color(0xff25472B),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+          )),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 400,
+              height: 130,
+              decoration: const BoxDecoration(
+                color: Color(0xffddffbb),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 4.0),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/lawyer/02.jpg"),
+                      radius: 50,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "C.A. Manas Kogta",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        "Dadar,Mumbai",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 63,
+                            height: 23,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(7)),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 3),
+                              child: Text(
+                                "+5 years",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            width: 70,
+                            height: 23,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(7)),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 3),
+                              child: Text(
+                                "+100 clients",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            width: 63,
+                            height: 23,
+                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(7)),
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 2.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "4.6/5",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  const Icon(
+                                    Icons.star,
+                                    size: 18,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 4.0),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage("images/photo2.jpg"),
-                    radius: 50,
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "About CA",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  width: 12,
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "CA Manas Kogta is a renowned name when it comes to managing finances, providing expert financial and tax services to individuals and businesses for financial success",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "C.A. Manas Kogta",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Schedule",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
-                    Text(
-                      "Dadar,Mumbai",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 63,
-                          height: 23,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7)),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        splashColor: Colors.green,
+                        child: Container(
+                          width: 108,
+                          height: 27,
+                          decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                           child: Padding(
                             padding: const EdgeInsets.only(top: 3),
                             child: Text(
-                              "+5 years",
+                              "18th September",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          width: 70,
-                          height: 23,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7)),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        splashColor: Colors.green,
+                        child: Container(
+                          width: 108,
+                          height: 27,
+                          decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                           child: Padding(
-                            padding: EdgeInsets.only(top: 3),
+                            padding: const EdgeInsets.only(top: 3),
                             child: Text(
-                              "+100 clients",
+                              "19th September",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          width: 63,
-                          height: 23,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7)),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        splashColor: Colors.green,
+                        child: Container(
+                          width: 108,
+                          height: 27,
+                          decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: 2.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "4.6/5",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                const Icon(
-                                  Icons.star,
-                                  size: 18,
-                                ),
-                              ],
+                            padding: const EdgeInsets.only(top: 3),
+                            child: Text(
+                              "20th September",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                             ),
                           ),
                         ),
-                      ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        splashColor: Colors.green,
+                        child: Container(
+                          width: 108,
+                          height: 27,
+                          decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 3),
+                            child: Text(
+                              "21st September",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Time Slot",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "About CA",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "CA Manas Kogta is a renowned name when it comes to managing finances, providing expert financial and tax services to individuals and businesses for financial success",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
-                  ),
+                const SizedBox(
+                  height: 12,
                 ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "Schedule",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(
                       width: 10,
@@ -172,18 +274,15 @@ class _SecondcontactState extends State<Secondcontact> {
                       onTap: () {},
                       splashColor: Colors.green,
                       child: Container(
-                        width: 108,
+                        width: 70,
                         height: 27,
-                        decoration: BoxDecoration(
-                            color: Color(0xffddffbb),
-                            borderRadius: BorderRadius.circular(7)),
+                        decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 3),
                           child: Text(
-                            "18th September",
+                            "10:00 AM",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w300),
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                           ),
                         ),
                       ),
@@ -195,18 +294,15 @@ class _SecondcontactState extends State<Secondcontact> {
                       onTap: () {},
                       splashColor: Colors.green,
                       child: Container(
-                        width: 108,
+                        width: 70,
                         height: 27,
-                        decoration: BoxDecoration(
-                            color: Color(0xffddffbb),
-                            borderRadius: BorderRadius.circular(7)),
+                        decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 3),
                           child: Text(
-                            "19th September",
+                            "11:00 AM",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w300),
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                           ),
                         ),
                       ),
@@ -218,18 +314,15 @@ class _SecondcontactState extends State<Secondcontact> {
                       onTap: () {},
                       splashColor: Colors.green,
                       child: Container(
-                        width: 108,
+                        width: 70,
                         height: 27,
-                        decoration: BoxDecoration(
-                            color: Color(0xffddffbb),
-                            borderRadius: BorderRadius.circular(7)),
+                        decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 3),
                           child: Text(
-                            "20th September",
+                            "12:00 PM",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w300),
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                           ),
                         ),
                       ),
@@ -241,211 +334,92 @@ class _SecondcontactState extends State<Secondcontact> {
                       onTap: () {},
                       splashColor: Colors.green,
                       child: Container(
-                        width: 108,
+                        width: 70,
                         height: 27,
-                        decoration: BoxDecoration(
-                            color: Color(0xffddffbb),
-                            borderRadius: BorderRadius.circular(7)),
+                        decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 3),
                           child: Text(
-                            "21st September",
+                            "01:00 PM",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13, fontWeight: FontWeight.w300),
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "Time Slot",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(minimumSize: Size(244, 42), backgroundColor: Color(0xff263a29)),
+                    onPressed: () {},
+                    child: Text(
+                      "Make appointment",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    splashColor: Colors.green,
-                    child: Container(
-                      width: 70,
-                      height: 27,
-                      decoration: BoxDecoration(
-                          color: Color(0xffddffbb),
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: Text(
-                          "10:00 AM",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    splashColor: Colors.green,
-                    child: Container(
-                      width: 70,
-                      height: 27,
-                      decoration: BoxDecoration(
-                          color: Color(0xffddffbb),
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: Text(
-                          "11:00 AM",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    splashColor: Colors.green,
-                    child: Container(
-                      width: 70,
-                      height: 27,
-                      decoration: BoxDecoration(
-                          color: Color(0xffddffbb),
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: Text(
-                          "12:00 PM",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    splashColor: Colors.green,
-                    child: Container(
-                      width: 70,
-                      height: 27,
-                      decoration: BoxDecoration(
-                          color: Color(0xffddffbb),
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: Text(
-                          "01:00 PM",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 60),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(244, 42),
-                      backgroundColor: Color(0xff263a29)),
-                  onPressed: () {},
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    "Make appointment",
+                    "Education",
                     style: TextStyle(
-                      color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Text(
-                  "Education",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 18),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Container(
-                  width: 320,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Color(0xffddffbb),
-                      borderRadius: BorderRadius.circular(7)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 3),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 4.0),
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage("images/logo2.jpg"),
-                            radius: 50,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "H.R College, Mumbai",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w400),
+                const SizedBox(height: 18),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Container(
+                    width: 320,
+                    height: 150,
+                    decoration: BoxDecoration(color: Color(0xffddffbb), borderRadius: BorderRadius.circular(7)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 3),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(left: 4.0),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage("assets/lawyer/coll02.jpg"),
+                              radius: 50,
                             ),
-                          ],
-                        )
-                      ],
+                          ),
+                          const SizedBox(
+                            width: 12,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "H.R College, Mumbai",
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
