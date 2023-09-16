@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_button.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_text_field.dart';
@@ -16,6 +17,7 @@ class _GSTCalcState extends State<GSTCalc> {
   double cgstAmount = 0.0;
   double sgstAmount = 0.0;
   double gstAmount = 0.0;
+  double totalAmount = 0.0;
 
   double calculateGSTAmount(double amount) {
     return (amount * gstRate) / 100;
@@ -27,7 +29,15 @@ class _GSTCalcState extends State<GSTCalc> {
       cgstAmount = calculateGSTAmount(inputAmount) / 2;
       sgstAmount = calculateGSTAmount(inputAmount) / 2;
       gstAmount = calculateGSTAmount(inputAmount);
+
+      totalAmount = inputAmount + gstAmount;
     });
+
+    Map<String, double> dataMap = {
+      'CGST': cgstAmount,
+      'SGST': sgstAmount,
+      'InputAmount': inputAmount,
+    };
   }
 
   @override
@@ -41,7 +51,8 @@ class _GSTCalcState extends State<GSTCalc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("GST Calculator"),
+        backgroundColor: Colors.white,
+        title: Text("GST Calculator", style: TextStyle(color: Colors.black)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0).copyWith(top: 30),
@@ -69,42 +80,74 @@ class _GSTCalcState extends State<GSTCalc> {
               ),
               child: Container(
                 width: 400,
-                height: 150,
+                height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  gradient: LinearGradient(
-                    colors: [Colors.yellow.shade100, Colors.green.shade500],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                  color: Colors.grey.shade400,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'CGST/SGST',
-                            style: TextStyle(color: Colors.white),
+                          Text(
+                            'CGST',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
-                          Text('CGST: $cgstAmount'),
-                          Text('SGST: $sgstAmount'),
-                          Text('GST: $gstAmount'),
-                          const SizedBox(height: 20.0),
-                          // Text(
-                          //     'Amount After Adding GST: ${inputAmount + gstAmount}'),
+                          Text('₹$cgstAmount',
+                              style: TextStyle(
+                                  color: Colors.blue.shade400, fontSize: 24)),
                         ],
                       ),
-                    ),
-                    Container(
-                      width: 1,
-                      height: 110,
-                      color: Colors.white,
-                    ),
-                    Text('Yellow'),
-                  ],
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'SGST',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          Text('₹$sgstAmount',
+                              style: TextStyle(
+                                  color: Colors.blue.shade400, fontSize: 24)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'GST',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          Text('₹$gstAmount',
+                              style: TextStyle(
+                                  color: Colors.blue.shade400, fontSize: 24)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total Amount',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          Text('₹$totalAmount',
+                              style: TextStyle(
+                                  color: Colors.blue.shade400, fontSize: 24)),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

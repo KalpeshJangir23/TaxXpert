@@ -18,7 +18,7 @@ class CustomCalcCard extends StatelessWidget {
       height: 180,
       width: double.infinity,
       child: Card(
-        color: Colors.greenAccent,
+        color: color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

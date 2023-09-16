@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_button.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_text_field.dart';
+import 'dart:math';
 
 class EMICalc extends StatefulWidget {
   const EMICalc({super.key});
@@ -14,27 +15,36 @@ class _EMICalcState extends State<EMICalc> {
   TextEditingController _loanAmountController = TextEditingController();
   TextEditingController _interestController = TextEditingController();
   TextEditingController _tenureController = TextEditingController();
-  String name = '';
-  String ogName = '';
-  int loanAmount = 0;
-  int ogAmount = 0;
-  int years = 0;
-  int ogYears = 0;
-  double interest = 0.0;
-  double ogInterest = 0.0;
+  double emi = 0.0;
 
   void calcEmi() {
-    ogName = _nameController.toString();
-    ogAmount = int.tryParse(_loanAmountController.text)!;
-    ogYears = int.tryParse(_tenureController.text)!;
-    ogInterest = double.tryParse(_interestController.text)!;
+    double loanAmount = double.tryParse(_loanAmountController.text) ?? 0.0;
+    int tenureMonths = int.tryParse(_tenureController.text) ?? 0;
+    double interstRate = double.tryParse(_interestController.text) ?? 0.0;
+
+    if (loanAmount > 0 && tenureMonths > 0 && interstRate > 0) {
+      double monthlyInterestRate = (interstRate / 12) / 100;
+      double numerator = loanAmount * monthlyInterestRate;
+      double denominator =
+          1 - (1 / (pow(1 + monthlyInterestRate, tenureMonths)));
+      double emi = numerator / denominator;
+
+      setState(() {
+        this.emi = emi;
+      });
+    } else {
+      setState(() {
+        this.emi = 0.0;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Emi Calculator"),
+        backgroundColor: Colors.white,
+        title: Text("Emi Calculator", style: TextStyle(color: Colors.black)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -88,7 +98,7 @@ class _EMICalcState extends State<EMICalc> {
                 ),
                 child: Container(
                   width: 400,
-                  height: 170,
+                  height: 220,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     color: Colors.grey.shade400,
@@ -108,7 +118,7 @@ class _EMICalcState extends State<EMICalc> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Loan Amount', style: TextStyle(fontSize: 20)),
-                            Text('₹ 1500000',
+                            Text('₹${_loanAmountController.text}',
                                 style: TextStyle(
                                     color: Colors.blue.shade400, fontSize: 24)),
                           ],
@@ -124,7 +134,7 @@ class _EMICalcState extends State<EMICalc> {
                               style: TextStyle(fontSize: 20),
                             ),
                             Text(
-                              '20 years',
+                              '${_tenureController.text}',
                               style: TextStyle(
                                   color: Colors.blue.shade400, fontSize: 24),
                             ),
@@ -138,7 +148,20 @@ class _EMICalcState extends State<EMICalc> {
                           children: [
                             Text('Interest Rate ',
                                 style: TextStyle(fontSize: 20)),
-                            Text('20 %',
+                            Text('${_interestController.text}',
+                                style: TextStyle(
+                                    color: Colors.blue.shade400, fontSize: 24)),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Emi (per month) :  ',
+                                style: TextStyle(fontSize: 20)),
+                            Text('₹${emi}',
                                 style: TextStyle(
                                     color: Colors.blue.shade400, fontSize: 24)),
                           ],
