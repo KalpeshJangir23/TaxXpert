@@ -10,37 +10,51 @@ class CalculatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff92B79F),
       appBar: AppBar(
-        title: Text('Calculator'),
+        title: const Center(
+            child: Text(
+          'Calculator',
+          style: TextStyle(fontSize: 20),
+        )),
+        elevation: 0,
+        backgroundColor: const Color(0xff92B79F),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 15, top: 10, right: 10),
+        padding: const EdgeInsets.all(8),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomCalcCard(
-                title: "Income Tax Calculator",
+                title: "  Income Tax Calculator",
                 logo: const Icon(Icons.calculate),
-                destinationNavigate: IncomeTaxCalc(),
+                destinationNavigate: const IncomeTaxCalc(),
                 color: Colors.greenAccent,
               ),
               CustomCalcCard(
-                title: "GST Calculator",
-                logo: const Icon(Icons.calculate),
-                destinationNavigate: GSTCalc(),
+                title: "  GST Calculator",
+                logo: const Icon(Icons.monitor_heart_sharp),
+                destinationNavigate: const GSTCalc(),
                 color: Colors.greenAccent,
-              ),
-              const SizedBox(
-                height: 10,
               ),
               CustomCalcCard(
-                title: "Emi Calculator",
-                logo: const Icon(Icons.calculate),
-                destinationNavigate: EMICalc(),
+                title: "  EMI Calculator",
+                logo: const Icon(Icons.mobile_friendly_rounded),
+                destinationNavigate: const EMICalc(),
                 color: Colors.greenAccent,
               ),
-              const SizedBox(
-                height: 10,
+              CustomCalcCard(
+                title: "  Home Loan",
+                logo: const Icon(Icons.home_work_outlined),
+                destinationNavigate: const EMICalc(),
+                color: Colors.greenAccent,
+              ),
+              CustomCalcCard(
+                title: "  Student Loan",
+                logo: const Icon(Icons.cast_for_education),
+                destinationNavigate: const EMICalc(),
+                color: Colors.greenAccent,
               ),
             ],
           ),

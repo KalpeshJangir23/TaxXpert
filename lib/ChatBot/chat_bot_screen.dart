@@ -29,8 +29,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         addMessage(Message(text: DialogText(text: [text])), true);
       });
 
-      DetectIntentResponse response = await _dialogFlowtter.detectIntent(
-          queryInput: QueryInput(text: TextInput(text: text)));
+      DetectIntentResponse response = await _dialogFlowtter.detectIntent(queryInput: QueryInput(text: TextInput(text: text)));
 
       if (response.message == null) {
         return;
@@ -49,9 +48,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xff92B79F),
       appBar: AppBar(
-        title: Text("Chat Bot"),
+        title: Text("TaxXpert"),
+        elevation: 0,
+        backgroundColor: const Color(0xff92B79F),
       ),
       body: Container(
         padding: const EdgeInsets.only(bottom: 28),
@@ -63,12 +64,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   //  color: Colors.deepPurple,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Colors.deepPurple,
+                    color: Color(0xff41854e),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -76,9 +76,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       Expanded(
                         child: TextField(
                           controller: _controller,
-                          decoration: new InputDecoration.collapsed(
-                            hintText: 'Send a message',
-                          ),
+                          decoration: new InputDecoration.collapsed(hintText: 'Send a message', hintStyle: TextStyle(color: Colors.white)),
                           style: const TextStyle(
                             color: Colors.white,
                           ),

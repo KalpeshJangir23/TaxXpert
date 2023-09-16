@@ -19,7 +19,10 @@ class NewsScreen extends StatelessWidget {
     double propertyTaxPercentage = (propertyTax / totalIncome) * 100;
 
     return Scaffold(
+      backgroundColor: const Color(0xff92B79F),
       appBar: AppBar(
+        backgroundColor: const Color(0xff25472B),
+        elevation: 0,
         title: const Text('Income and Tax Pie Chart'),
       ),
       body: SingleChildScrollView(
@@ -28,56 +31,62 @@ class NewsScreen extends StatelessWidget {
             Container(
               width: 400,
               height: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Colors.amberAccent,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0), // Adjust the radius as needed
+                  bottomRight: Radius.circular(20.0), // Adjust the radius as needed
+                ),
+                color: Color(0xff25472B),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      child: PieChart(
-                        PieChartData(
-                          sections: [
-                            PieChartSectionData(
-                              color: Colors.blue,
-                              value: annualSalaryPercentage,
-                              title: '${annualSalaryPercentage.toStringAsFixed(2)}%',
-                            ),
-                            PieChartSectionData(
-                              color: Colors.red,
-                              value: rentalIncomePercentage,
-                              title: '${rentalIncomePercentage.toStringAsFixed(2)}%',
-                            ),
-                            PieChartSectionData(
-                              color: Colors.green,
-                              value: incomeTaxPercentage,
-                              title: '${incomeTaxPercentage.toStringAsFixed(2)}%',
-                            ),
-                            PieChartSectionData(
-                              color: Colors.orange,
-                              value: propertyTaxPercentage,
-                              title: '${propertyTaxPercentage.toStringAsFixed(2)}%',
-                            ),
-                          ],
-                          borderData: FlBorderData(show: false),
-                          centerSpaceRadius: 60,
-                          sectionsSpace: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        child: PieChart(
+                          PieChartData(
+                            sections: [
+                              PieChartSectionData(
+                                color: Colors.blue,
+                                value: annualSalaryPercentage,
+                                title: '${annualSalaryPercentage.toStringAsFixed(2)}%',
+                              ),
+                              PieChartSectionData(
+                                color: Colors.red,
+                                value: rentalIncomePercentage,
+                                title: '${rentalIncomePercentage.toStringAsFixed(2)}%',
+                              ),
+                              PieChartSectionData(
+                                color: Colors.green,
+                                value: incomeTaxPercentage,
+                                title: '${incomeTaxPercentage.toStringAsFixed(2)}%',
+                              ),
+                              PieChartSectionData(
+                                color: Colors.orange,
+                                value: propertyTaxPercentage,
+                                title: '${propertyTaxPercentage.toStringAsFixed(2)}%',
+                              ),
+                            ],
+                            borderData: FlBorderData(show: false),
+                            centerSpaceRadius: 60,
+                            sectionsSpace: 0,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildLegendItem('Gross Salary', annualSalary, Colors.blue),
-                      _buildLegendItem('Rental Income', rentalIncome, Colors.red),
-                      _buildLegendItem('Income Tax', incomeTax, Colors.green),
-                      _buildLegendItem('Property Tax', propertyTax, Colors.orange),
-                    ],
-                  ),
-                ],
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildLegendItem('Gross Salary', annualSalary, Colors.blue),
+                        _buildLegendItem('Rental Income', rentalIncome, Colors.red),
+                        _buildLegendItem('Income Tax', incomeTax, Colors.green),
+                        _buildLegendItem('Property Tax', propertyTax, Colors.orange),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -130,9 +139,12 @@ class NewsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Text(
-                    "You can reduce tax to ₹2,13,720 and save ₹46,800 by investing ₹1,50,000 more with 80C as per the old tax regime.",
-                    style: TextStyle(fontSize: 20, color: Colors.green),
+                  const Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text(
+                      "You can reduce tax to ₹2,13,720 and save ₹46,800 by investing ₹1,50,000 more with 80C as per the old tax regime.",
+                      style: TextStyle(fontSize: 20, color: Color(0xffffffff), fontWeight: FontWeight.bold),
+                    ),
                   ),
                   TextButton(
                       onPressed: () {
@@ -184,7 +196,7 @@ class NewsScreen extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             '$title: ₹${value.toStringAsFixed(2)}',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
           ),
         ],
       ),

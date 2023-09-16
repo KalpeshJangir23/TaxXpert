@@ -32,7 +32,7 @@ class _TextWithdividerState extends State<TextWithdivider> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.label, style: const TextStyle(fontSize: 20, color: Colors.black)),
+                  Text(widget.label, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 36, 36, 36))),
                   Container(height: 2),
                   Text(
                     widget.value,
@@ -58,7 +58,7 @@ class _TextWithdividerState extends State<TextWithdivider> {
           if (widget.showDivider) // Conditionally display the Divider
             const Divider(
               thickness: 1,
-              color: Colors.grey,
+              color: Color.fromARGB(255, 135, 134, 134),
             ),
         ],
       ),

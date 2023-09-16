@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -109,7 +111,8 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Edit Salary Details'),
+          backgroundColor: Color(0xff92B79F),
+          title: const Text('Edit Salary Details'),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -117,7 +120,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
                 buildInputField('HRA', 'HRA (House Rent Allowance)'),
                 buildInputField('Bonus', 'Bonus/Commission'),
                 buildInputField('OtherAllowances', 'Other Allowances'),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () {
                     // Calculate the total salary here
@@ -131,7 +134,8 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
 
                     Navigator.of(context).pop(); // Close the dialog
                   },
-                  child: Text('Calculate Salary'),
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff2F873C))),
+                  child: const Text('Calculate Salary'),
                 ),
               ],
             ),
@@ -145,16 +149,44 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Salary & Income')),
+        backgroundColor: const Color(0xff92B79F),
+        appBar: AppBar(
+          title: const Center(child: Text('Salary & Income')),
+          backgroundColor: const Color(0xff92B79F),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(children: [
-              SizedBox(height: 20.0),
-              Text(
-                'Total Salary: ${totalSalary.toStringAsFixed(2)}', // Display the total salary
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              const SizedBox(height: 20.0),
+              Center(
+                child: Container(
+                  width: 150,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffEFF8F1),
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: const Color(0xff2F873C), width: 2),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const Text("Total Salary : ",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color(0xff25472B),
+                            )),
+                        Text(
+                          '${totalSalary.toStringAsFixed(2)}', // Display the total salary
+                          style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
+              const SizedBox(height: 20.0),
               GestureDetector(
                 onTap: () => showFormDialog(),
                 child: const TextWithdivider(
@@ -207,7 +239,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
                 child: TextField(
                   controller: getController(fieldName),
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Amount',
                   ),
                 ),
@@ -215,6 +247,7 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
               Flexible(
                 flex: 1,
                 child: CupertinoSlidingSegmentedControl(
+                  thumbColor: const Color(0xff2F873C),
                   groupValue: selectedOptions[fieldName],
                   onValueChanged: (value) {
                     setState(() {
@@ -223,12 +256,12 @@ class _UserSalaryIncomeState extends State<UserSalaryIncome> {
                   },
                   children: {
                     'M': Container(
-                      padding: EdgeInsets.all(3.0),
-                      child: Text('M'),
+                      padding: const EdgeInsets.all(3.0),
+                      child: const Text('M'),
                     ),
                     'Y': Container(
-                      padding: EdgeInsets.all(3.0),
-                      child: Text('Y'),
+                      padding: const EdgeInsets.all(3.0),
+                      child: const Text('Y'),
                     ),
                   },
                 ),

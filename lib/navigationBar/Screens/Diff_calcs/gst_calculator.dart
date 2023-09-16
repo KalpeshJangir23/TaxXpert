@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_button.dart';
 import 'package:nfc_iterators/navigationBar/Screens/Diff_calcs/utils/custom_text_field.dart';
+import 'package:nfc_iterators/widgets/TextWithdivider.dart';
 
 class GSTCalc extends StatefulWidget {
   const GSTCalc({super.key});
@@ -40,8 +41,11 @@ class _GSTCalcState extends State<GSTCalc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff92B79F),
       appBar: AppBar(
-        title: Text("GST Calculator"),
+        elevation: 0,
+        backgroundColor: const Color(0xff92B79F),
+        title: const Text("GST Calculator"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0).copyWith(top: 30),
@@ -69,7 +73,7 @@ class _GSTCalcState extends State<GSTCalc> {
               ),
               child: Container(
                 width: 400,
-                height: 150,
+                height: 450,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
@@ -78,32 +82,82 @@ class _GSTCalcState extends State<GSTCalc> {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Table(
+                        border: TableBorder.all(), // Add borders around cells
+                        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                         children: [
-                          const Text(
-                            'CGST/SGST',
-                            style: TextStyle(color: Colors.white),
+                          TableRow(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            children: const [
+                              TableCell(
+                                child: Center(
+                                  child: Text('Central GST', style: TextStyle(fontSize: 20)),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                  child: Text('GST', style: TextStyle(fontSize: 25)),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                  child: Text('StateGST', style: TextStyle(fontSize: 25)),
+                                ),
+                              ),
+                            ],
                           ),
-                          Text('CGST: $cgstAmount'),
-                          Text('SGST: $sgstAmount'),
-                          Text('GST: $gstAmount'),
-                          const SizedBox(height: 20.0),
-                          // Text(
-                          //     'Amount After Adding GST: ${inputAmount + gstAmount}'),
+                          TableRow(
+                            children: [
+                              TableCell(
+                                child: Center(
+                                  child: Text('$cgstAmount', style: const TextStyle(fontSize: 25)),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                  child: Text('$gstAmount.', style: const TextStyle(fontSize: 25)),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                  child: Text('$sgstAmount', style: const TextStyle(fontSize: 25)),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                    Container(
-                      width: 1,
-                      height: 110,
-                      color: Colors.white,
+                    const SizedBox(
+                      height: 30,
                     ),
-                    Text('Yellow'),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: TextWithdivider(label: "What is SGST ?", value: " ", income: ""),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: TextWithdivider(label: "What is CGST ?", value: " ", income: ""),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: TextWithdivider(label: "Pros of GST ?", value: " ", income: ""),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: TextWithdivider(
+                        label: "How Does SGST & CGST differ?",
+                        value: " ",
+                        income: "",
+                        showDivider: false,
+                      ),
+                    ),
                   ],
                 ),
               ),

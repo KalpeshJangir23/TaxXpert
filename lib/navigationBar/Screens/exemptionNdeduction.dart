@@ -14,45 +14,48 @@ class _ExmeptionAndDeductionState extends State<ExmeptionAndDeduction> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(children: [
-          const TextWithdivider(
-            label: "Standard Deduction",
-            value: "Standard Deduction...",
-            income: "₹50,000",
-            showIncome: true,
-            showDivider: true,
-          ),
-          GestureDetector(
-            onLongPress: () => _showInformationDialog(context),
-            child: const TextWithdivider(
-              label: "80C",
-              value: "Life Insurance,PPF,EPF...",
-              income: "120000",
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            const TextWithdivider(
+              label: "Standard Deduction",
+              value: "Standard Deduction...",
+              income: "₹50,000",
+              showIncome: true,
               showDivider: true,
             ),
-          ),
-          const TextWithdivider(
-            label: "80CG",
-            value: "Deduction and Rent Payment...",
-            income: "1,20,000",
-            showDivider: true,
-          ),
-          const TextWithdivider(
-            label: "Professional Tax",
-            value: "Professional Tax...",
-            income: "1,20,000",
-            showDivider: true,
-          ),
-          const TextWithdivider(
-            label: "80D",
-            value: "health Insurance Premia",
-            income: "1,20,000",
-            showDivider: true,
-          ),
-          const Center(
-            child: Text("More", style: TextStyle(color: Colors.red, fontSize: 20)),
-          )
-        ]),
+            GestureDetector(
+              onLongPress: () => _showInformationDialog(context),
+              child: const TextWithdivider(
+                label: "80C",
+                value: "Life Insurance,PPF,EPF...",
+                income: "120000",
+                showDivider: true,
+              ),
+            ),
+            const TextWithdivider(
+              label: "80CG",
+              value: "Deduction and Rent Payment...",
+              income: "1,20,000",
+              showDivider: true,
+            ),
+            const TextWithdivider(
+              label: "Professional Tax",
+              value: "Professional Tax...",
+              income: "1,20,000",
+              showDivider: true,
+            ),
+            const TextWithdivider(
+              label: "80D",
+              value: "health Insurance Premia",
+              income: "1,20,000",
+              showDivider: true,
+            ),
+            const Center(
+              child: Text("More", style: TextStyle(color: Colors.red, fontSize: 20)),
+            )
+          ]),
+        ),
       ),
     );
   }
@@ -62,6 +65,7 @@ class _ExmeptionAndDeductionState extends State<ExmeptionAndDeduction> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Color(0xff92B79F),
           title: const Text(
             'Section 80C',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

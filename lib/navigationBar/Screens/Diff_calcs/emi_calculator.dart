@@ -33,8 +33,11 @@ class _EMICalcState extends State<EMICalc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff92B79F),
       appBar: AppBar(
+        elevation: 0,
         title: Text("Emi Calculator"),
+        backgroundColor: const Color(0xff92B79F),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -91,7 +94,11 @@ class _EMICalcState extends State<EMICalc> {
                   height: 170,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.grey.shade400,
+                    gradient: LinearGradient(
+                      colors: [Colors.yellow.shade100, Colors.green.shade500],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
@@ -99,7 +106,7 @@ class _EMICalcState extends State<EMICalc> {
                       children: [
                         Text(
                           'Your loan details as specified by you ',
-                          style: TextStyle(color: Colors.black, fontSize: 16),
+                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 13,
@@ -108,9 +115,7 @@ class _EMICalcState extends State<EMICalc> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Loan Amount', style: TextStyle(fontSize: 20)),
-                            Text('₹ 1500000',
-                                style: TextStyle(
-                                    color: Colors.blue.shade400, fontSize: 24)),
+                            Text('₹ 1500000', style: TextStyle(color: Colors.black, fontSize: 24)),
                           ],
                         ),
                         SizedBox(
@@ -125,8 +130,7 @@ class _EMICalcState extends State<EMICalc> {
                             ),
                             Text(
                               '20 years',
-                              style: TextStyle(
-                                  color: Colors.blue.shade400, fontSize: 24),
+                              style: TextStyle(color: Colors.black, fontSize: 24),
                             ),
                           ],
                         ),
@@ -136,11 +140,8 @@ class _EMICalcState extends State<EMICalc> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Interest Rate ',
-                                style: TextStyle(fontSize: 20)),
-                            Text('20 %',
-                                style: TextStyle(
-                                    color: Colors.blue.shade400, fontSize: 24)),
+                            Text('Interest Rate ', style: TextStyle(fontSize: 20)),
+                            Text('20 %', style: TextStyle(color: Colors.black, fontSize: 24)),
                           ],
                         ),
                       ],

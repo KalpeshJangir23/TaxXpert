@@ -4,8 +4,10 @@ import 'package:line_icons/line_icons.dart';
 import 'package:nfc_iterators/navigationBar/Screens/calculator.dart';
 import 'package:nfc_iterators/navigationBar/Screens/dashboard.dart';
 import 'package:nfc_iterators/navigationBar/Screens/insights.dart';
-import 'package:nfc_iterators/navigationBar/Screens/profileScreen.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import 'Screens/profileScreen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   const BottomNavigationScreen({super.key});
@@ -19,10 +21,10 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   final List<Widget> screens = [
-    DashboardScreen(),
-    CalculatorScreen(),
+    const DashboardScreen(),
+    const CalculatorScreen(),
     NewsScreen(),
-    profileScreen(),
+    const ProfileScreen(),
   ];
 
   void onTap(int index) {
@@ -37,7 +39,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
       body: screens[currentTab],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0xff92B79F),
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
@@ -49,6 +51,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
+              backgroundColor: const Color(0xff92B79F),
               onTabChange: onTap,
               selectedIndex: currentTab,
               rippleColor: Colors.grey[300]!,
@@ -56,25 +59,29 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
               tabs: const [
                 GButton(
                   icon: LineIcons.home,
+                  iconColor: Color(0xff41854e),
                   text: 'Home',
                 ),
                 GButton(
                   icon: LineIcons.calculator,
+                  iconColor: Color(0xff41854e),
                   text: 'Calculator',
                 ),
                 GButton(
                   icon: LineIcons.newspaper,
+                  iconColor: Color(0xff41854e),
                   text: 'Analytics',
                 ),
                 GButton(
                   icon: LineIcons.user,
+                  iconColor: Color(0xff41854e),
                   text: 'Profile',
                 ),
               ],

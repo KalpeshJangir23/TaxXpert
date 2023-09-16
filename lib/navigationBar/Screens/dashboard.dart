@@ -11,6 +11,8 @@ import 'package:nfc_iterators/navigationBar/Screens/salaryNincome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 
+import 'caScreen.dart';
+
 class NewTaxSlab {
   final double lowerLimit;
   final double upperLimit;
@@ -143,9 +145,16 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0xff92B79F),
         appBar: AppBar(
-          elevation: 2,
-          title: const Text("Home"),
+          backgroundColor: const Color(0xff92B79F),
+          elevation: 0,
+          title: const Center(
+            child: Text(
+              "Home",
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
           actions: const [
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -156,9 +165,9 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
         drawer: MyDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBotScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatBotScreen()));
           },
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xffEFF8F1),
           child: CircleAvatar(
             child: Image.asset('assets/chatBot_intructor.png'),
           ),
@@ -167,57 +176,71 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Welcome back Kalpesh"),
+                const Text(
+                  "Welcome back Kalpesh",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Color(
+                        0xff333333,
+                      ),
+                      fontWeight: FontWeight.bold),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Material(
+                    color: const Color(0xff92B79F),
+                    elevation: 4,
+                    child: GestureDetector(
+                      onTap: () {
+                        // TODO: Ye implement karna
+                      },
+                      child: TextField(
+                        enabled: false,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              //borderSide: const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: Color(0xff333333),
+                            ),
+                            hintText: "Search...",
+                            filled: true,
+                            fillColor: const Color(0xffEFF8F1)),
+                      ),
+                    ),
+                  ),
+                ),
+
                 Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        width: 150,
-                        height: 215,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.grey,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          //crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text("Old Regime"),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                            Column(
-                              children: [
-                                Lottie.asset(
-                                  "assets/lottie/money.json",
-                                ),
-                                Text(
-                                  '₹${oldRegimeTaxAmount.toStringAsFixed(2)}',
-                                  style: TextStyle(fontSize: 23),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Expanded(
+                      child: Material(
+                        color: const Color(0xffeff8f1),
+                        elevation: 8, // Adjust the elevation value as needed
+                        borderRadius: BorderRadius.circular(20.0),
+                        borderOnForeground: true, //
                         child: Container(
                           width: 150,
-                          height: 215,
+                          height: 225,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.blue,
+                            border: Border.all(color: const Color.fromARGB(255, 135, 47, 65), width: 2 // Set the border color to green
+                                // Set the border width as needed
+                                ),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             //crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text("New Regime"),
+                              const Text(
+                                "Old Regime",
+                                style: TextStyle(fontSize: 15, color: Color(0xff333333), fontWeight: FontWeight.bold),
+                              ),
                               const Divider(
                                 thickness: 1,
                               ),
@@ -226,7 +249,10 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                                   Lottie.asset(
                                     "assets/lottie/money.json",
                                   ),
-                                  Text('₹${newRegimeTaxAmount.toStringAsFixed(2)}'),
+                                  Text(
+                                    '₹${oldRegimeTaxAmount.toStringAsFixed(2)}',
+                                    style: const TextStyle(fontSize: 23),
+                                  ),
                                 ],
                               ),
                             ],
@@ -234,35 +260,121 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Expanded(
+                        child: Material(
+                          color: const Color(0xffeff8f1),
+                          elevation: 8, // Adjust the elevation value as needed
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderOnForeground: true, //
+
+                          child: Container(
+                            width: 150,
+                            height: 225,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              border: Border.all(color: const Color(0xff2F873C), width: 2
+                                  // Set the border color to green
+                                  // Set the border width as needed
+                                  ),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              //crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "New Regime",
+                                  style: TextStyle(fontSize: 15, color: Color(0xff333333), fontWeight: FontWeight.bold),
+                                ),
+                                const Divider(thickness: 1),
+                                Column(
+                                  children: [
+                                    Lottie.asset(
+                                      "assets/lottie/money.json",
+                                    ),
+                                    Text('₹${newRegimeTaxAmount.toStringAsFixed(2)}', style: const TextStyle(fontSize: 23)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
 
-                Text('₹${ans.toStringAsFixed(2)}'),
+                Center(
+                  child: Container(
+                    width: 150,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffEFF8F1),
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(color: const Color(0xff2F873C), width: 2),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          if (ans >= 0)
+                            Row(
+                              children: [
+                                const Text("Profit : ",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color(0xff25472B),
+                                    )),
+                                Text('₹${ans.toStringAsFixed(2)}',
+                                    style: const TextStyle(fontSize: 20, color: Color(0xff333333), fontWeight: FontWeight.bold)),
+                              ],
+                            )
+                          else
+                            Row(
+                              children: [
+                                const Text("Loss : ",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color.fromARGB(255, 177, 1, 25),
+                                    )),
+                                Text('₹${ans.toStringAsFixed(2)}',
+                                    style: const TextStyle(fontSize: 20, color: Color(0xff333333), fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
 
                 //! On screen Tab bar
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
                     height: 380,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     child: Column(
                       children: [
-                        SizedBox(height: 18),
+                        const SizedBox(height: 18),
                         Container(
                           // height: 50,
                           width: MediaQuery.of(context).size.height,
-                          decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(5)),
+                          decoration: BoxDecoration(color: const Color(0xff41854e), borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: TabBar(
                                   unselectedLabelColor: Colors.white,
                                   labelColor: Colors.black,
-                                  indicatorColor: Colors.white,
+                                  indicatorColor: const Color(0xffEFF8F1),
                                   indicatorWeight: 2,
                                   indicator: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
+                                    color: const Color(0xffEFF8F1),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   controller: tabController,
                                   tabs: const [
@@ -307,51 +419,71 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Color(0xffEFF8F1),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Color(0xff2F873C),
             ),
             child: Column(
               children: const [
                 Text(
-                  'App Name',
+                  'TaxXpert',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 CircleAvatar(
-                  radius: 40,
+                  radius: 30,
                   backgroundImage: AssetImage('assets/userPic.jpg'),
+                ),
+                Text(
+                  'Kalpesh Jangir',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ],
             ),
           ),
           ListTile(
             leading: const Icon(Icons.article),
-            title: const Text('News'),
+            title: const Text(
+              'News',
+              style: TextStyle(color: Colors.black),
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('About'),
+            leading: const Icon(Icons.contact_mail),
+            title: const Text(
+              'CA',
+              style: TextStyle(color: Colors.black),
+            ),
             onTap: () {
               Navigator.pop(context);
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const caScreen()));
             },
           ),
           ListTile(
-            leading: const Icon(Icons.contact_mail),
-            title: const Text('Contact'),
+            leading: const Icon(Icons.info),
+            title: const Text(
+              'About',
+              style: TextStyle(color: Colors.black),
+            ),
             onTap: () {
               Navigator.pop(context);
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => Contact()));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
             },
           ),
         ],

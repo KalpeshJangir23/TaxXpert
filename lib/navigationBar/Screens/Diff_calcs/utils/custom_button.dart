@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
       width: 200,
       height: 60,
       radius: RadiusPlus.all(12),
-      color: Colors.blue,
+      color: Color(0xff41854e),
       enabled: true,
       splashColor: Colors.red,
       highlightColor: Colors.yellow,
